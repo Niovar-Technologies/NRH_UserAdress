@@ -110,6 +110,20 @@ namespace NRH_UserAdress.Controllers
         {
             return _context.Pays.Any(e => e.ID == id);
         }
+
+
+        // les provinces d'un pays
+        [HttpGet("ProvincesPays/{paysid}")]
+        public async Task<ActionResult<IEnumerable<Province>>> ProvincesPays(int paysid)
+        {
+            var Provinces = _context.Province
+                .Where(b => b.paysID == paysid);
+
+            if (Provinces == null)
+                return NotFound();
+
+            return await Provinces.ToListAsync();
+        }
     }
 }
 

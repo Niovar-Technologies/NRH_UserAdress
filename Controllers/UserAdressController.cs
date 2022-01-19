@@ -173,7 +173,7 @@ Console.WriteLine("provinceId" + provinceId);
 
             if (Accounts == null)
                 return NotFound();
-            return await _context.Account.ToListAsync();
+            return await Accounts.ToListAsync();
         }
 
         // les users d'une province
@@ -185,7 +185,7 @@ Console.WriteLine("provinceId" + provinceId);
 
             if (Accounts == null)
                 return NotFound();
-            return await _context.Account.ToListAsync();
+            return await Accounts.ToListAsync();
         }
 
         // les users d'une ville
@@ -197,7 +197,7 @@ Console.WriteLine("provinceId" + provinceId);
 
             if (Accounts == null)
                 return NotFound();
-            return await _context.Account.ToListAsync();
+            return await Accounts.ToListAsync();
         }
     }
 }
