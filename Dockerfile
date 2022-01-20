@@ -28,5 +28,5 @@ COPY . .
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=build-env /app/out .
-ENV ASPNETCORE_URLS http://*:9095
+ENV ASPNETCORE_URLS http://*:9096
 ENTRYPOINT ["dotnet", "NRH_UserAdress.dll"]
