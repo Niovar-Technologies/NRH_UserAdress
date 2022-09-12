@@ -18,9 +18,24 @@ using System;
 using System.Linq;
 using System.Text;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      builder =>
+                      {
+                          builder.WithOrigins("https://niovarpaie.ca",   // frontend container
+                                              "https://profileuser.niovarpaie.ca",
+                                              "https://loadbalancer.niovarpaie.ca") // loadbalancer
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                      });
+});
+
 builder.Services.AddDbContext<UserAdressContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("myconn02")));
 
@@ -42,6 +57,8 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 // Configure the HTTP request pipeline.
 //if (builder.Environment.IsDevelopment())
